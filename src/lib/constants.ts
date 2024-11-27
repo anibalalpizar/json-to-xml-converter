@@ -54,3 +54,29 @@ export const JSON_EXAMPLES = [
   }`,
   },
 ];
+
+export const SITE_CONFIG = {
+  title: "JSON to XML Converter - Free Online Tool",
+  description:
+    "Convert JSON to XML online with our free, fast, and easy-to-use tool. Features real-time conversion, syntax highlighting, and shareable links. Try it now!",
+  keywords: [
+    "json to xml",
+    "xml converter",
+    "json converter",
+    "online converter",
+    "free converter",
+    "json formatter",
+    "xml formatter",
+    "data conversion",
+    "web tools",
+    "developer tools",
+  ],
+  url: "https://json-to-xml.vercel.app",
+  twitterHandle: "@yourtwitterhandle",
+  author: "Your Name",
+  locale: "en_US",
+  themeColor: "#000000",
+  alternateLanguages: [
+    { code: "en", name: "English", url: "https://json-to-xml.vercel.app" },
+  ],
+};
