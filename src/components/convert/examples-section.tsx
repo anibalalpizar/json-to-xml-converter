@@ -1,69 +1,11 @@
-"use client";
+import { Button } from "@/components/ui/button";
+import { JSON_EXAMPLES } from "@/lib/constants";
 
-import { Button } from "./ui/button";
-
-const examples = [
-  {
-    title: "Simple Object",
-    json: `{
-  "name": "John Doe",
-  "age": 30,
-  "city": "New York"
-}`,
-  },
-  {
-    title: "Array of Objects",
-    json: `{
-  "users": [
-    {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com"
-    },
-    {
-      "id": 2,
-      "name": "Bob",
-      "email": "bob@example.com"
-    }
-  ]
-}`,
-  },
-  {
-    title: "Nested Structure",
-    json: `{
-  "company": {
-    "name": "Tech Corp",
-    "location": {
-      "city": "San Francisco",
-      "country": "USA"
-    },
-    "employees": 500
-  }
-}`,
-  },
-  {
-    title: "Mixed Types",
-    json: `{
-  "product": {
-    "id": "123",
-    "name": "Laptop",
-    "price": 999.99,
-    "inStock": true,
-    "tags": ["electronics", "computers"],
-    "specs": {
-      "cpu": "Intel i7",
-      "ram": "16GB"
-    }
-  }
-}`,
-  },
-];
-
-interface JsonExamplesProps {
+interface ExamplesSectionProps {
   onExampleClick: (json: string) => void;
 }
 
-export function JsonExamples({ onExampleClick }: JsonExamplesProps) {
+export function ExamplesSection({ onExampleClick }: ExamplesSectionProps) {
   return (
     <footer className="container mx-auto p-4 mt-8">
       <div className="border-t pt-8">
@@ -74,7 +16,7 @@ export function JsonExamples({ onExampleClick }: JsonExamplesProps) {
           Click on any example below to load it into the editor
         </p>
         <div className="flex flex-wrap justify-center gap-4">
-          {examples.map((example, index) => (
+          {JSON_EXAMPLES.map((example, index) => (
             <div key={index} className="group relative" title={example.title}>
               <Button
                 variant="outline"

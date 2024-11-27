@@ -1,4 +1,4 @@
-import { JsonToXmlConverter } from "@/components/json-to-xml-converter";
+import { JsonToXmlConverter } from "@/components/convert/json-to-xml-converter";
 
 export default function Home() {
   return (

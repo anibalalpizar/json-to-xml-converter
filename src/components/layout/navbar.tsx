@@ -1,6 +1,6 @@
 import { Github } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "../theme-toggle";
 
 export function Navbar() {
   return (
