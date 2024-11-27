@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ConverterService } from "@/lib/services/converter";
 import { generateShareableUrl } from "@/lib/utils";
 import { Share2 } from "lucide-react";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 
 interface JsonToXmlConverterProps {
   initialJson?: string;
