@@ -6,8 +6,9 @@ interface Props {
 }
 
 export default async function Home({ searchParams }: Props) {
-  const jsonFromUrl = searchParams.json
-    ? decodeJsonFromUrl(searchParams.json as string)
+  const params = await searchParams;
+  const jsonFromUrl = params.json
+    ? decodeJsonFromUrl(params.json as string)
     : undefined;
 
   return (
