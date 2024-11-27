@@ -1,9 +1,18 @@
 import { JsonToXmlConverter } from "@/components/convert/json-to-xml-converter";
+import { decodeJsonFromUrl } from "@/lib/utils";
 
-export default function Home() {
+interface Props {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function Home({ searchParams }: Props) {
+  const jsonFromUrl = searchParams.json
+    ? decodeJsonFromUrl(searchParams.json as string)
+    : undefined;
+
   return (
     <main className="min-h-[calc(100vh-4rem)]">
-      <JsonToXmlConverter />
+      <JsonToXmlConverter initialJson={jsonFromUrl} />
     </main>
   );
 }
