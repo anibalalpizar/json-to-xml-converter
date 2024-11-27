@@ -1,17 +1,32 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { JsonInput } from "./json-input";
 import { XmlOutput } from "./xml-output";
 import { ExamplesSection } from "./examples-section";
 import { Button } from "@/components/ui/button";
 import { ConverterService } from "@/lib/services/converter";
+import { generateShareableUrl } from "@/lib/utils";
+import { Share2 } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
-export function JsonToXmlConverter() {
-  const [jsonInput, setJsonInput] = useState("");
+interface JsonToXmlConverterProps {
+  initialJson?: string;
+}
+
+export function JsonToXmlConverter({ initialJson }: JsonToXmlConverterProps) {
+  const [jsonInput, setJsonInput] = useState(initialJson || "");
   const [xmlOutput, setXmlOutput] = useState("");
   const [jsonError, setJsonError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  useEffect(() => {
+    if (initialJson) {
+      handleJsonChange(initialJson);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialJson]);
 
   const handleJsonChange = useCallback(async (value: string) => {
     setJsonInput(value);
@@ -61,6 +76,17 @@ export function JsonToXmlConverter() {
     }
   }, [jsonInput]);
 
+  const handleShare = useCallback(() => {
+    if (!jsonInput) return;
+    const shareableUrl = generateShareableUrl(jsonInput);
+    navigator.clipboard.writeText(shareableUrl).then(() => {
+      toast({
+        title: "Link copied!",
+        description: "The shareable URL has been copied to your clipboard.",
+      });
+    });
+  }, [jsonInput, toast]);
+
   return (
     <>
       <div className="container mx-auto p-4">
@@ -77,6 +103,14 @@ export function JsonToXmlConverter() {
         <div className="flex justify-center space-x-4 mt-8">
           <Button variant="outline" onClick={handleClear}>
             Clear
+          </Button>
+          <Button
+            variant="outline"
+            onClick={handleShare}
+            disabled={!jsonInput || !!jsonError}
+          >
+            <Share2 className="mr-2 h-4 w-4" />
+            Share
           </Button>
         </div>
       </div>
