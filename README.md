@@ -4,8 +4,9 @@ A modern web application built with Next.js that allows users to convert JSON da
 
 🌐 **[Try it live](https://json-to-xml.vercel.app/)**
 
-![JSON to XML Converter](public/image-light.png)
-![JSON to XML Converter](public/image-dark.png)
+| Light Mode | Dark Mode |
+|------------|-----------|
+| ![JSON to XML Converter](public/image-light.png) | ![JSON to XML Converter](public/image-dark.png) |
 
 ## Features
 
