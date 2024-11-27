@@ -1,5 +1,5 @@
 import * as xmlJs from "xml-js";
-import type { JsonToXmlResponse } from "@/types";
+import { JsonToXmlResponse } from "@/types";
 
 export class ConverterService {
   static async jsonToXml(jsonString: string): Promise<JsonToXmlResponse> {
@@ -17,10 +17,12 @@ export class ConverterService {
         success: true,
         xml,
       };
-    } catch (error) {
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
       return {
         success: false,
-        error: `Error converting JSON to XML: ${error.message}`,
+        error: `Error converting JSON to XML: ${errorMessage}`,
       };
     }
   }
@@ -38,8 +40,10 @@ export class ConverterService {
     try {
       const parsed = JSON.parse(jsonString);
       return JSON.stringify(parsed, null, 2);
-    } catch {
-      throw new Error("Invalid JSON format");
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Invalid JSON format";
+      throw new Error(errorMessage);
     }
   }
 }

@@ -14,7 +14,9 @@ export async function convertJsonToXml(jsonString: string): Promise<string> {
 
     const result = xmlJs.js2xml(jsonObj, options);
     return result;
-  } catch (error) {
-    throw new Error(`Error converting JSON to XML: ${error.message}`);
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    throw new Error(`Error converting JSON to XML: ${errorMessage}`);
   }
 }

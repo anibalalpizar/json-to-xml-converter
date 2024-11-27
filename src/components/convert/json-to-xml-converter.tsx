@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { useState, useCallback } from "react";
 import { JsonInput } from "./json-input";
@@ -31,6 +31,11 @@ export function JsonToXmlConverter() {
         setJsonError(result.error || "Unknown error occurred");
         setXmlOutput("Please fix the JSON errors before converting");
       }
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : "Unknown error occurred";
+      setJsonError(errorMessage);
+      setXmlOutput("An error occurred during conversion");
     } finally {
       setIsLoading(false);
     }
@@ -47,8 +52,12 @@ export function JsonToXmlConverter() {
       const formatted = ConverterService.formatJson(jsonInput);
       setJsonInput(formatted);
       setJsonError(null);
-    } catch (error) {
-      setJsonError("Unable to format: Invalid JSON");
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Unable to format: Invalid JSON";
+      setJsonError(errorMessage);
     }
   }, [jsonInput]);
 
@@ -62,10 +71,7 @@ export function JsonToXmlConverter() {
             onFormat={handleFormat}
             error={jsonError}
           />
-          <XmlOutput
-            value={xmlOutput}
-            isLoading={isLoading}
-          />
+          <XmlOutput value={xmlOutput} isLoading={isLoading} />
         </div>
 
         <div className="flex justify-center space-x-4 mt-8">
