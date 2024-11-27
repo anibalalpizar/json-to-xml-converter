@@ -1,14 +1,10 @@
 import { JsonToXmlConverter } from "@/components/convert/json-to-xml-converter";
 import { decodeJsonFromUrl } from "@/lib/utils";
 
-interface Props {
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function Home({ searchParams }: Props) {
-  const params = await searchParams;
-  const jsonFromUrl = params.json
-    ? decodeJsonFromUrl(params.json as string)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function Home({ searchParams }: any) {
+  const jsonFromUrl = (await searchParams.json)
+    ? decodeJsonFromUrl(searchParams.json as string)
     : undefined;
 
   return (
